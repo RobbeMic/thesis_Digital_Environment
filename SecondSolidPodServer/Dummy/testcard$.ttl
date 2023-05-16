@@ -1,0 +1,15 @@
+@prefix foaf: <http://xmlns.com/foaf/0.1/>.
+@prefix solid: <http://www.w3.org/ns/solid/terms#>.
+@prefix vc: <http://www.w3.org/2006/vcard/ns#>.
+@prefix dct: <http://purl.org/dc/terms/>.
+@prefix dcat: <http://www.w3.org/ns/dcat#>.
+
+<#me> a foaf:Person;
+    solid:oidcIssuer <http://localhost:5000/>;
+    vc:fn "Robbe Michiels";
+    vc:organisation_name "UGent";
+    vc:role "Student".
+<#person2> a foaf:Person;
+    solid:oidcIssuer <http://localhost:5000/>;
+    vc:fn "Bert";
+    vc:role "werkloos".

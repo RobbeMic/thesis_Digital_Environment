@@ -1,0 +1,10 @@
+.buttonContainer > button > p {
+    font-weight: bold;
+    word-wrap: break-word;
+    margin: 0;
+}
+
+.buttonContainer > button > *:first-child {
+    font-size: 1.5rem;
+    font-weight: bold;
+}

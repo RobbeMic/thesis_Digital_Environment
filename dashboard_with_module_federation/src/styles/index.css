@@ -1,0 +1,40 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+
+  background-color: gainsboro;
+  background-image: linear-gradient(to bottom, slateGray, whitesmoke);
+
+  min-height: 100vh;
+  max-height: 100vh;
+  min-width: 100vw;
+  max-width: 100vw;
+  overflow: hidden;
+}
+
+body > *:first-child {
+  min-height: 100vh;
+}
+
+.container {
+  width: 100%;
+  min-height: calc(100vh - 4rem);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.navBar {
+  background-color: rgb(39, 41, 60);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 4rem;
+  max-height: 4rem;
+  padding-left: 15px;
+}
+
+.navBar > * {
+  color: whitesmoke;
+}

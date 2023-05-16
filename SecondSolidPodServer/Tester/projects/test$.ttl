@@ -1,0 +1,12 @@
+<#test> a <https://w3id.org/consolid#Project>;
+    <http://purl.org/dc/terms/title> "test";
+    <http://www.w3.org/ns/dcat#dataset> <#_1>.
+<#_1> a <http://www.w3.org/ns/dcat#Dataset>;
+    <http://purl.org/dc/terms/hasPart> <#_site1>, <#_building1>.
+<#_site1> a <https://w3id.org/bot#Site>;
+    <http://www.w3.org/2000/01/rdf-schema#label> "site";
+    <https://w3id.org/bot#hasBuilding> <#_building1>;
+    <http://www.w3.org/2000/01/rdf-schema#comment> "http://localhost:5100/Tester/models/raam_blender_test.gltf".
+<#_building1> a <https://w3id.org/bot#Building>;
+    <http://www.w3.org/2000/01/rdf-schema#label> "building";
+    <http://www.w3.org/2000/01/rdf-schema#comment> "http://localhost:5100/Tester/models/scene.gltf".

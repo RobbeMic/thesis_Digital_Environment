@@ -1,0 +1,139 @@
+.hidden {
+    display: none;
+    opacity: 0;
+    z-index: -10;
+}
+
+.positionAbsolute {
+    position: absolute;
+}
+
+.modalBackground {
+    z-index: 10;
+    opacity: 1;
+    top: 0;
+    left: 0;
+    min-width: 100vw;
+    width: 100vw;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.modal {
+    max-width: 70%;
+    max-height: 80vh;
+    border-radius: 15px;
+    background-color: whitesmoke;
+    padding: 15px;
+    overflow-y: auto;
+}
+
+.modal > form {
+    max-height: 100%;
+    
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.modal > form > * {
+    padding: 0;
+    margin: 0;
+}
+
+.modal > form > *:last-child {
+    margin-top: 15px;
+}
+
+.modal > form > h1 {
+    font-size: 2rem;
+
+}
+
+.modal > form > label {
+    font-size: 1rem;
+    margin-top: 15px;
+}
+
+.modal > form > input {
+    padding: 8px;
+    border-style: none;
+    border-width: thin;
+    border-color: slategray;
+    border-radius: 5px;
+}
+
+.dropdown {
+    display: inline;
+    position: relative;
+    max-width: fit-content;
+    max-height: 32px;
+}
+  
+.dropdownOptions {
+    display: block;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    height: fit-content;
+    opacity: 0;
+
+    pointer-events: none;
+
+    transform: translateY(-10px);
+    transition: opacity 50ms ease-in, transform 50ms ease-in;
+}
+
+.dropdown > * {
+    /* top: -24px; */
+    position: relative;
+}
+
+.dropdown > input, .dropdownOptions > input {
+    padding: 8px;
+    border-style: none;
+    border-radius: 5px;
+    cursor: pointer;
+    height: 16px;
+}
+
+.dropdownOptions > input:hover {
+    background-color: rgb(230, 230, 230);
+}
+
+.opacity100 {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+}
+
+.buttonRow {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.buttonRow > button {
+    padding: 8px;
+    min-width: 25%;
+    border-radius: 8px;
+    border-style: solid;
+    background-color: white;
+}
+
+.buttonRow > button:hover {
+    cursor: pointer;
+    background-color: rgb(230, 230, 230);
+}
+  
+.submitButton {
+    color: rgb(116, 190, 4);
+    border-color: rgb(116, 190, 4);
+}

@@ -1,0 +1,53 @@
+#the relevant prefixes
+@prefix mifestoRM: <http://localhost:5000/Tester/ontology/mifestoRM#>.
+    #why is the current document denoted with a / instead of a #?
+
+@prefix owl: <http://www.w3.org/2002/07/owl#>.
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix dcat: <http://www.w3.org/ns/dcat>.
+@prefix dct: <http://purl.org/dc/terms/>.
+@prefix dcterms: <http://purl.org/dc/terms/>.
+
+
+#some metadata
+mifestoRM: a owl:Ontology;
+    dcterms:title "MIcro FrontEnd Store Ontology";
+    dcterms:description """
+    *This is a draft document and ontology*
+    The "MIcro FrontEnd Store Ontology" as revised by Robbe Michiels; originally described by Jeroen Werbrouck.
+    The ontology is aimed at describing micro frontend applications which handle rdf structured data.
+    The goal is to create collections of these applications in such a manner they can be searched and displayed in some sort of "app store".
+    """.
+
+#the classes
+mifestoRM:Store rdf:type rdfs:Class.
+mifestoRM:ModuleManifest rdf:type rdfs:Class.
+mifestoRM:Release rdf:type rdfs:Class.
+mifestoRM:InputType rdf:type rdfs:Class.
+mifestoRM:OutputType rdf:type rdfs:Class.
+mifestoRM:InStoreImage rdf:type rdfs:Class.
+    #should be replaced by a proper image descriptor
+
+#the properties
+mifestoRM:moduleName rdf:type rdfs:label.
+mifestoRM:moduleDescription rdf:type rdfs:comment.
+mifestoRM:hasVersion rdf:type rdf:Property.
+mifestoRM:versionNumber rdf:type rdf:value.
+mifestoRM:hasModule rdf:type rdf:comment.
+    #the comment property should be replaced by a property to write valid url's
+mifestoRM:consumesInput rdf:type rdf:Property.
+mifestoRM:expectedOutput rdf:type rdf:Property.
+mifestoRM:conformsTo rdf:type dct:conformsTo.
+
+mifestoRM:apiHasUrlParam rdf:type rdfs:comment.
+mifestoRM:apiHasIdentifierParam rdf:type rdfs:comment.
+
+#the meta-data classes
+mifestoRM:Origin rdf:type rdfs:Class.
+
+#the meta-data properties
+mifestoRM:hasOrigin rdf:type rdf:Property.
+mifestoRM:originatesFrom rdf:type rdf:Property.
+mifestoRM:addedBy rdf:type rdf:Property.
+mifestoRM:addedOn rdf:type dcterms:dateSubmitted.

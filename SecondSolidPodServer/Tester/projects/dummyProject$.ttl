@@ -1,0 +1,74 @@
+@prefix consolid: <https://w3id.org/consolid#>.
+@prefix dcat: <http://www.w3.org/ns/dcat#>.
+@prefix dct: <http://purl.org/dc/terms/>.
+@prefix bot: <https://w3id.org/bot#>.
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix mifestoRM: <http://localhost:5000/Tester/ontology/mifestoRM#>.
+
+<#project> a consolid:Project;
+    dct:creator "Robbe";
+    dct:title "Dummy Project";
+    dct:description "lorem ipsum";
+    dcat:dataset <#_1>.
+<#_1> a dcat:Dataset;
+    dct:hasPart <#_site1>, <#_building1>, <#damage_428502>, <#damage_620683>, <#concept_952330>, <#damage_468308>, <#concept_99992>, <#damage_731034>.
+<#_site1> a bot:Site;
+    rdfs:label "the site";
+    bot:hasBuilding <#_building1>.
+<#_building1> a bot:Building;
+    rdfs:label "the dummy building";
+    <https://w3id.org/dot#hasDamage> <#damage_620683>, <#damage_468308>, <#damage_673>, <#damage_731828>.
+<#damage_620683> a <https://w3id.org/dot#Damage>;
+    rdfs:comment "test";
+    dct:date "undefined";
+    <https://w3id.org/dot#hasCausation> <#cause_302120>;
+    mifestoRM:hasOrigin <#origin_755213>.
+<#damage_468308> a <https://w3id.org/dot#Damage>;
+    rdfs:comment "test";
+    dct:date "undefined";
+    <https://w3id.org/dot#hasCausation> <#cause_740192>;
+    mifestoRM:hasOrigin <#origin_444479>.
+<#concept_99992> a mifestoRM:LinksetConcept;
+    rdfs:label "Voorgevel";
+    <https://w3id.org/dot#hasDamage> <#damage_731034>;
+    rdfs:comment "voorgevel";
+    mifestoRM:hasOrigin <#origin_dashboard_918697>.
+<#damage_673> a <https://w3id.org/dot#DamageArea>;
+    rdfs:comment "shade";
+    dct:date "2023-03-14";
+    <https://w3id.org/dot#hasCausation> <#cause_660>;
+    mifestoRM:hasOrigin <#origin_432>.
+<#damage_731828> a <https://w3id.org/dot#DamageArea>;
+    rdfs:comment "cracks";
+    dct:date "2023-04-14";
+    <https://w3id.org/dot#hasCausation> <#cause_539119>;
+    mifestoRM:hasOrigin <#origin_224917>.
+<#cause_302120> a <https://w3id.org/dot#Causation>;
+    rdfs:comment "testing the list".
+<#origin_755213> a mifestoRM:Origin;
+    mifestoRM:addedOn "Wed Apr 19 2023 18:37:35 GMT+0200 (Midden-Europese zomertijd)".
+<#cause_740192> a <https://w3id.org/dot#Causation>;
+    rdfs:comment "test".
+<#origin_444479> a mifestoRM:Origin;
+    mifestoRM:addedOn "Thu Apr 27 2023 11:55:31 GMT+0200 (Midden-Europese zomertijd)".
+<#cause_660> a <https://w3id.org/dot#Causation>;
+    rdfs:comment "oorzaak".
+<#origin_432> a mifestoRM:Origin;
+    mifestoRM:addedOn "Thu Mar 16 2023 11:54:08 GMT+0100 (Midden-Europese standaardtijd)".
+<#cause_539119> a <https://w3id.org/dot#Causation>;
+    rdfs:comment "water pressure".
+<#origin_224917> a mifestoRM:Origin;
+    mifestoRM:addedOn "Wed Apr 19 2023 15:37:38 GMT+0200 (Midden-Europese zomertijd)".
+<#origin_dashboard_918697> a mifestoRM:Origin;
+    mifestoRM:addedOn "Thu Apr 27 2023 11:59:44 GMT+0200 (Midden-Europese zomertijd)";
+    mifestoRM:originatesFrom "http://localhost:3000/project?url=http://localhost:5100/Tester/projects/dummyProject&iri=project".
+<#damage_731034> a <https://w3id.org/dot#DamageElement>;
+    rdfs:comment "scheur bovenste raam";
+    dct:date "2023-04-21";
+    <https://w3id.org/dot#hasCausation> <#cause_886205>;
+    mifestoRM:hasOrigin <#origin_424920>.
+<#cause_886205> a <https://w3id.org/dot#Causation>;
+    rdfs:comment "water overlast op het dak".
+<#origin_424920> a mifestoRM:Origin;
+    mifestoRM:addedOn "Thu Apr 27 2023 12:00:48 GMT+0200 (Midden-Europese zomertijd)".

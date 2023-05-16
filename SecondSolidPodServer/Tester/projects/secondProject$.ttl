@@ -1,0 +1,8 @@
+@prefix consolid: <https://w3id.org/consolid#>.
+@prefix dcat: <http://www.w3.org/ns/dcat#>.
+@prefix dct: <http://purl.org/dc/terms/>.
+
+<http://localhost:5100/Tester/projects/secondProject#project> a consolid:Project;
+    dct:creator "Bert";
+    dct:title "Second Project";
+    dct:description "dolor sit emit".

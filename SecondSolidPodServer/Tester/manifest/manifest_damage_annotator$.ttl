@@ -1,0 +1,43 @@
+@prefix mifestoRM: <http://localhost:5000/Tester/ontology/mifestoRM#>.
+@prefix consolid: <https://w3id.org/consolid#>.
+@prefix dcat: <http://www.w3.org/ns/dcat>.
+@prefix dct: <http://purl.org/dc/terms/>.
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix fno: <https://w3id.org/function/ontology#>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
+
+<http://localhost:5100/Tester/manifest/manifest_damage_annotator#manifest> a mifestoRM:ModuleManifest;
+    mifestoRM:moduleName "federated_damage_annotator";
+    mifestoRM:moduleDescription "add damage anotations to concepts in the project graph";
+    mifestoRM:hasFunctionModule <#functionModule>.
+
+<#functionModule> a mifestoRM:FunctionModule;
+    mifestoRM:hasVersion <#release_functionModule_1>.
+
+<#release_functionModule_1> a mifestoRM:Release;
+    mifestoRM:versionNumber 0.2;
+    mifestoRM:consumesInput <#_datasetParameter>, <#_itemParameter>, <#_itemNameParameter>;
+    mifestoRM:hasModule <#module_functionModule>.
+
+<#module_functionModule> a mifestoRM:Module;
+    rdfs:label "./functions";
+    mifestoRM:isExposedOn "http://localhost:3200/remoteEntry.js".
+
+# <#_databaseParameter> a fno:Parameter;
+#     rdfs:label "database";
+#     fno:type xsd:string;
+#     fno:required "true"^^xsd:boolean.
+
+<#_datasetParameter> a fno:Parameter;
+    rdfs:label "dataset";
+    fno:type consolid:PartialProject;
+    fno:required "false"^^xsd:boolean.
+
+<#_itemParameter> a fno:Parameter;
+    rdfs:label "item";
+    fno:required "true"^^xsd:boolean.
+
+<#_itemNameParameter> a fno:Parameter;
+    rdfs:label "itemName";
+    fno:type xsd:string;
+    fno:required "false"^^xsd:boolean.

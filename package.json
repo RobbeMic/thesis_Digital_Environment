@@ -1,0 +1,18 @@
+{
+  "name": "thesisdigitalenvironment",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "SolidServer1": "npm --prefix SolidPodServer run dev",
+    "SolidServer2": "npm --prefix SecondSolidPodServer run dev",
+    "thesisDashboard": "npm --prefix dashboard_with_module_federation run start",
+    "damage_annotator": "npm --prefix federated_damage_annotator run start",
+    "3d_renderer": "npm --prefix federated_3d_renderer run dev",
+    "prestartEnvironment": "wt cmd /k npm run SolidServer1 && wt cmd /k npm run SolidServer2",
+    "startEnvironment": "wt cmd /k npm run thesisDashboard",
+    "poststartEnvironment":"wt cmd /k npm run damage_annotator && wt cmd /k npm run 3d_renderer"
+  },
+  "author": "",
+  "license": "ISC"
+}

@@ -1,0 +1,5 @@
+{
+    "scripts": {
+        "dev": "community-solid-server -c @css:config/file.json -p 5100"
+    }
+}
