@@ -1,0 +1,1 @@
+run "community-solid-server -c @css:config/file.json -p 5000" in the cmd on this directory

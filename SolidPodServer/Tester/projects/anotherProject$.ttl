@@ -1,0 +1,7 @@
+@prefix consolid: <https://w3id.org/consolid#>.
+@prefix dct: <http://www.w3.org/ns/dcat#>.
+
+<http://localhost:5000/Tester/projects/anotherProject#project> a consolid:Project;
+    dct:creator "Patrik";
+    dct:title "Another Project";
+    dct:description "consectetur adipiscing".

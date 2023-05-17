@@ -1,0 +1,17 @@
+# Root ACL resource for the agent account
+@prefix acl: <http://www.w3.org/ns/auth/acl#>.
+@prefix foaf: <http://xmlns.com/foaf/0.1/>.
+
+# the publuc access
+<#public>
+    a acl:Authorization;
+    acl:agentClass foaf:Agent;
+    acl:accessTo <./dummyProject>;
+    acl:mode acl:Read, acl:Write, acl:Control.
+
+# the specific access for the owner
+<#owner>
+    a acl:Authorization;
+    acl:agent <http://localhost:5000/Tester/profile/card#me>;
+    acl:accessTo <./dummyProject>;
+    acl:mode acl:Read, acl:Write, acl:Control.

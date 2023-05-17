@@ -1,0 +1,38 @@
+#the prefixes:
+@prefix mifestoRM: <http://localhost:5000/Tester/ontology/mifestoRM#>.
+@prefix dcat: <http://www.w3.org/ns/dcat>.
+@prefix dct: <http://purl.org/dc/terms/>.
+@prefix dcterms: <http://purl.org/dc/terms/>.
+
+# the store
+<#_store> a mifestoRM:Store;
+    dct:title "Example Store";
+    dct:description "an example Mifesto Manifest Store";
+    dcat:dataset <#_set1>.
+
+<#_set1> a dcat:Catalog;
+    dct:title "Protoype Applications";
+    dcat:hasPart <http://localhost:5100/Tester/manifest/manifest_damage_annotator#manifest>.
+
+
+# ___Depricated!___
+# #the applications:
+# <#_01> a mifestoRM:ModuleManifest;
+#     mifestoRM:moduleName "Damage Annotator";
+#     mifestoRM:moduleDescription "add damage anotations to concepts in the project graph";
+#     mifestoRM:hasVersion <#_011>.
+
+# <#_02> a mifestoRM:ModuleManifest;
+#     mifestoRM:moduleName "Image annotator";
+#     mifestoRM:moduleDescription "adds images with a comment to the project graph".
+
+# <#_03> a mifestoRM:ModuleManifest;
+#     mifestoRM:moduleName "Heritage descriptor";
+#     mifestoRM:moduleDescription "adds a heritage description to objects in the project graph".
+
+# #the releases of the applications:
+# <#_010> a mifestoRM:Release;
+#     mifestoRM:versionNumber 0;
+#     mifestoRM:hasModule "http://localhost:3200";
+#     mifestoRM:apiHasUrlParam "URL";
+#     mifestoRM:apiHasIdentifierParam "object".

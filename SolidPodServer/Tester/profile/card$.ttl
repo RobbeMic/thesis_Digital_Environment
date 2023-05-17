@@ -1,0 +1,22 @@
+@prefix foaf: <http://xmlns.com/foaf/0.1/>.
+@prefix solid: <http://www.w3.org/ns/solid/terms#>.
+@prefix VCARDns: <http://www.w3.org/2006/vcard/ns#>.
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix dcat: <http://www.w3.org/ns/dcat#>.
+@prefix dct: <http://purl.org/dc/terms/>.
+@prefix consolid: <https://w3id.org/consolid#>.
+
+<http://localhost:5000/Tester/profile/card> a foaf:PersonalProfileDocument;
+    foaf:maker <#me>;
+    foaf:primaryTopic <#me>.
+<#me> a foaf:Person;
+    solid:oidcIssuer <http://localhost:5000/>;
+    VCARDns:fn "Robbe".
+<#listOfProjects> a dcat:Catalog;
+    dct:hasPart <http://localhost:5100/Tester/projects/dummyProject#project>, <http://localhost:5100/Tester/projects/secondProject#project>, <http://localhost:5100/Tester/projects/anotherProject#project>, <http://localhost:5100/Tester/projects/test#test>.
+
+<#myContributions> a consolid:PartialProject;
+    dct:hasPart <http://localhost:5100/Tester/projects/dummyProject#_1>.
+
+<#savedModulesList> a dcat:Catalog;
+    dct:hasPart <http://localhost:5100/Tester/manifest/manifest_damage_annotator#manifest>.
