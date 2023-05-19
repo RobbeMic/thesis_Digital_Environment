@@ -1,14 +1,16 @@
-import React from "react";
-import ReactDOM from "react-dom";
+import React, { useEffect, useState } from "react";
+// import ReactDOM from "react-dom";
+import { createRoot } from "react-dom/client"
 
 import "./index.css";
 
+
+import LandingPage from "./pages/landingPage";
+
+
+
 const App = () => (
-  <div className="container">
-    <div>Name: federated_3d_renderer</div>
-    <div>Framework: react</div>
-    <div>Language: TypeScript</div>
-    <div>CSS: Empty CSS</div>
-  </div>
+  <LandingPage/>
 );
-ReactDOM.render(<App />, document.getElementById("app"));
+const root = createRoot(document.getElementById("app")!)
+root.render(<App />);

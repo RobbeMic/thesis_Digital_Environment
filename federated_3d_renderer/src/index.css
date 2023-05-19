@@ -8,3 +8,7 @@ body {
   max-width: 800px;
   margin-top: 20px;
 }
+
+.container > *:last-child {
+  height: 50vh;
+}

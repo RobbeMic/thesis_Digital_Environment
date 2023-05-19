@@ -12,7 +12,7 @@
 
 <#_set1> a dcat:Catalog;
     dct:title "Protoype Applications";
-    dcat:hasPart <http://localhost:5100/Tester/manifest/manifest_damage_annotator#manifest>.
+    dcat:hasPart <http://localhost:5100/Tester/manifest/manifest_damage_annotator#manifest>, <http://localhost:5100/Tester/manifest/manifest_3d_renderer#manifest>.
 
 
 # ___Depricated!___

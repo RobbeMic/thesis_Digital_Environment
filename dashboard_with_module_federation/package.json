@@ -39,9 +39,10 @@
     "@comunica/query-sparql": "^2.6.9",
     "@comunica/query-sparql-link-traversal-solid": "^0.1.1",
     "@comunica/query-sparql-solid": "^2.4.0",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "react-icons": "^4.8.0",
-    "react-router-dom": "^6.9.0"
+    "react-router-dom": "^6.9.0",
+    "stream-browserify": "^3.0.0"
   }
 }

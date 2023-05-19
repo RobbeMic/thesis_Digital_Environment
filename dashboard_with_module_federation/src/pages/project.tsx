@@ -48,11 +48,13 @@ export default function ProjectPage(props:pageProps) {
     const [isRemoveModalOpen, setIsRemoveModalOpen] = useState<boolean>(false)
 
     const [projectUrl, setProjectUrl] = useState<string>()
-    const [projectIri, setProjectIri] = useState<string>()
+    // const [projectIri, setProjectIri] = useState<string>()
     const [projectDataset, setProjectDataset] = useState<string>()
     const [selectedItem, setSelectedItem] = useState<itemProps|undefined>()
+    const [selectedViewer, setSelectedViewer] = useState<module|undefined>(undefined)
     const [selectedModule, setSelectedModule] = useState<module|undefined>(undefined)
     const [projectItemList, setProjectItemList] = useState<itemProps[]|undefined>(undefined)
+    const [viewerList, setViewerList] = useState<module[]|undefined>(undefined)
     const [moduleList, setModuleList] = useState<module[]|undefined>(undefined)
 
     if(!props.pageHeader) {
@@ -62,6 +64,7 @@ export default function ProjectPage(props:pageProps) {
     useEffect(() => {
         getUrlParams()
         getFunctionModuleList()
+        getViewerModuleList()
         // getFederatedButtons("federated_damage_annotator", "./functions", "http://localhost:3200/remoteEntry.js")
     }, [])
 
@@ -99,6 +102,21 @@ export default function ProjectPage(props:pageProps) {
         return <ModuleLoader url={applicationUrl} scope={applicationName} module={applicationModule} passedProps={propsToPass}/>
     }
 
+    function viewerWindows(viewerList:module[]|undefined){
+        if (!viewerList || viewerList.length == 0) return 
+
+        return viewerList.map((viewerModule) => {
+            const propsToPass:passedProps = {
+                database: projectUrl,
+                item: selectedItem,
+                setItem: setSelectedItem
+            }
+            return <div className={(selectedViewer == viewerModule)? "full_width_height" : "hidden"} key={viewerModule.manifestUri} >
+                <ModuleLoader url={viewerModule.exposeUrl} scope={viewerModule.name} module={viewerModule.moduleName} passedProps={propsToPass} />
+            </div>
+        })
+    }
+
     async function getUrlParams() {
         const queryString = window.location.search
 
@@ -111,7 +129,6 @@ export default function ProjectPage(props:pageProps) {
         if(!projectUrl || !projectIri) return
 
         setProjectUrl(projectUrl)
-        setProjectIri(projectIri)
 
         getProjectProps(projectUrl, projectIri)
     }
@@ -176,11 +193,73 @@ export default function ProjectPage(props:pageProps) {
         })
     }
 
+    async function getViewerModuleList() {
+        let user = (props.session.info.webId)? props.session.info.webId: "http://localhost:5000/Tester/profile/card#me"
+
+        let userUrl = new URL(user)
+
+        let baseUserUrl = userUrl.href.replace(userUrl.hash, "")
+
+        console.log("trying to get viewers from " + baseUserUrl)
+
+        const queryBindings = await queryEngine.queryBindings(`
+            PREFIX mifestoRM: <http://localhost:5000/Tester/ontology/mifestoRM#>
+            PREFIX dct: <http://purl.org/dc/terms/>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+            SELECT ?moduleManifest ?applicationName ?moduleName ?moduleExposeUrl
+
+            WHERE {
+                <${baseUserUrl}#savedModulesList> dct:hasPart ?moduleManifest.
+
+                ?moduleManifest a mifestoRM:ModuleManifest;
+                    mifestoRM:moduleName ?applicationName;
+                    mifestoRM:hasViewerModule ?viewerModule.
+
+                ?viewerModule a mifestoRM:ViewerModule;
+                    mifestoRM:hasVersion ?release.
+                
+                ?release a mifestoRM:Release;
+                    mifestoRM:hasModule ?module.
+
+                ?module a mifestoRM:Module;
+                    rdfs:label ?moduleName;
+                    mifestoRM:isExposedOn ?moduleExposeUrl.
+            }
+        `, {
+            sources: [baseUserUrl]
+        })
+
+        let newModuleList:module[] = []
+
+        queryBindings.on('data', (binding) => {
+            console.log(binding.toString())
+
+            const newModule:module = {
+                name: binding.get('applicationName').value,
+                exposeUrl: binding.get('moduleExposeUrl').value,
+                moduleName: binding.get('moduleName').value,
+                manifestUri: binding.get('moduleManifest').value
+            }
+
+            newModuleList.push(newModule)
+        })
+
+        queryBindings.on('end', () => {
+            console.log("query ended")
+            console.log(newModuleList)
+            if (newModuleList.length >= 1) {
+                setViewerList(newModuleList)
+            }
+        })
+    }
+
     async function getProjectProps(projectUrl:string, projectIri:string) {
-        console.log('beep!')
+        // console.log('beep!')
         if(!projectUrl || !projectIri) return
 
-        console.log(projectUrl + "#" + projectIri)
+        // console.log(projectUrl + "#" + projectIri)
 
         const bindingStream = await queryEngine.queryBindings(`
             PREFIX solid: <http://www.w3.org/ns/solid/terms#>
@@ -215,7 +294,7 @@ export default function ProjectPage(props:pageProps) {
 
         bindingStream.on('data', (binding) => {
             if(binding.get('projectName').value) {setPageHeader(binding.get('projectName').value)}
-            console.log(binding.toString())
+            // console.log(binding.toString())
             setProjectDataset(binding.get('dataset').value)
 
             const newItem:itemProps = {
@@ -231,7 +310,7 @@ export default function ProjectPage(props:pageProps) {
 
         bindingStream.on('end', () => {
             
-            console.log(projectList)
+            // console.log(projectList)
             setProjectItemList(projectList)
 
             triggerGetItemProps(projectList, projectUrl)
@@ -251,7 +330,7 @@ export default function ProjectPage(props:pageProps) {
     async function getItemProperties(item:itemProps, projectUrl:string) {
         if(!projectUrl) return
 
-        console.log('trying to get props from ' + item.label + ' at "' + item.uri + '"')
+        // console.log('trying to get props from ' + item.label + ' at "' + item.uri + '"')
 
         const bindingStream = await secondQueryEngine.queryBindings(`
             PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
@@ -274,7 +353,7 @@ export default function ProjectPage(props:pageProps) {
         let newPropArray:itemProps[] = []
 
         bindingStream.on('data', (binding) => {
-            console.log(binding.toString())
+            // console.log(binding.toString())
 
             newPropArray.push({
                 class: binding.get('p').value,
@@ -283,8 +362,8 @@ export default function ProjectPage(props:pageProps) {
         })
 
         bindingStream.on('end', () => {
-            console.log("got properties form " + item.label)
-            console.log(newPropArray)
+            // console.log("got properties form " + item.label)
+            // console.log(newPropArray)
             item.properties = newPropArray
         })
 
@@ -298,7 +377,7 @@ export default function ProjectPage(props:pageProps) {
 
         if(!itemList) return <div>no items yet!</div>
 
-        return <div className="itemGrid">
+        return <div className={selectedViewer? "hidden": "itemGrid"}>
             {itemList.map((item:itemProps) => {
                 const itemUriAsUrl = new URL(item.uri)
 
@@ -368,6 +447,12 @@ export default function ProjectPage(props:pageProps) {
 
         return newList.map((module:module|undefined) => {
             return <p className={(selectedModule == module)? "selected": ""} onClick={() => {setSelectedModule(module)}}>{(module)? module.name: "dashboard functions"}</p>
+        })
+    }
+
+    function createWindowsTabs(list:module[]|undefined) {
+        if(list) return list.map((module) => {
+            return <p className={(selectedViewer == module)? "selected": ""} onClick={() => {setSelectedViewer(module)}} >{module.name}</p>
         })
     }
 
@@ -449,7 +534,15 @@ export default function ProjectPage(props:pageProps) {
 
                 {buttonRows()}
             </div>
-            {createItemGrid(projectItemList)}
+            <div className="viewerWindow">
+                {createItemGrid(projectItemList)}
+                {viewerWindows(viewerList)}
+            </div>
+            <div className="windowTabs">
+                <p className={selectedViewer? "": "selected"} onClick={() => {setSelectedViewer(undefined)}} >dashboard list</p>
+                {createWindowsTabs(viewerList)}
+            </div>
+            
         </div>
     </div> )
 }

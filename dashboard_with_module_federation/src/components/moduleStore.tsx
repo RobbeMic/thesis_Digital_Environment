@@ -73,7 +73,7 @@ export default function ModuleStore(props:pageProps) {
             PREFIX dcat: <http://www.w3.org/ns/dcat>
             PREFIX dct: <http://purl.org/dc/terms/>
 
-            SELECT ?moduleUri ?moduleName ?moduleDesc
+            SELECT DISTINCT ?moduleUri ?moduleName ?moduleDesc
             WHERE {
                 <http://localhost:5000/Tester/store/simpleDummyStore#_store> a mifestoRM:Store;
                     dcat:dataset ?dataset.

@@ -9,6 +9,7 @@ module.exports = {
 
   resolve: {
     extensions: [".tsx", ".ts", ".jsx", ".js", ".json"],
+    fallback:{"stream": require.resolve("stream-browserify")}
   },
 
   devServer: {

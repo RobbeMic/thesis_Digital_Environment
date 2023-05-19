@@ -9,6 +9,7 @@ module.exports = (_, argv) => ({
 
   resolve: {
     extensions: [".tsx", ".ts", ".jsx", ".js", ".json"],
+    fallback:{"stream": require.resolve("stream-browserify")}
   },
 
   devServer: {
@@ -36,6 +37,10 @@ module.exports = (_, argv) => ({
           loader: "babel-loader",
         },
       },
+      {
+        test: /\.json$/,
+        loader: 'json-loader'
+      },
     ],
   },
 
@@ -44,7 +49,10 @@ module.exports = (_, argv) => ({
       name: "federated_3d_renderer",
       filename: "remoteEntry.js",
       remotes: {},
-      exposes: {},
+      exposes: {
+        "./viewer": "./src/modules/ThreeContainer.tsx",
+        "./functions": "./src/modules/Buttons.tsx",
+      },
       shared: {
         ...deps,
         react: {

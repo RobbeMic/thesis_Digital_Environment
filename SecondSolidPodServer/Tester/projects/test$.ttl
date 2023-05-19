@@ -9,4 +9,4 @@
     <http://www.w3.org/2000/01/rdf-schema#comment> "http://localhost:5100/Tester/models/raam_blender_test.gltf".
 <#_building1> a <https://w3id.org/bot#Building>;
     <http://www.w3.org/2000/01/rdf-schema#label> "building";
-    <http://www.w3.org/2000/01/rdf-schema#comment> "http://localhost:5100/Tester/models/scene.gltf".
+    <http://localhost:5000/Tester/ontology/inst#hasGltf> "http://localhost:5100/Tester/models/raam_blender_test.glb".

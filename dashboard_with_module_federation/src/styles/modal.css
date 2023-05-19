@@ -126,6 +126,7 @@
 
 /* styles specifically for the store modal */
 .moduleContainer {
+    min-height: 50vh;
     display: flex;
     flex-direction: column;
     gap: 5px;
@@ -146,6 +147,7 @@
     display: grid;
     justify-content: end;
     grid-template-columns: 75px calc(100% - 75px);
+    overflow: hidden;
 }
 
 .moduleContainer > ul:last-child {
