@@ -1,0 +1,113 @@
+.renderer_hidden {
+    opacity: 0;
+    display: none;
+    max-height: 0;
+    /* transition: all 500ms ease-in-out; */
+}
+
+.renderer_modalContainer {
+    position: absolute;
+    height: 100vh;
+    min-width: 100vw;
+    width: 100vw;
+    z-index: 10;
+    background-color: rgb(17, 55, 77, 0.6);
+    top: 0;
+    left: 0;
+
+    opacity: 1;
+    max-height: 100vh;
+    /* transition: all 500ms ease-in-out; */
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.renderer_modal {
+    background-color: aliceblue;
+    padding: 15px;
+    min-width: 500px;
+    min-height: 300px;
+
+    position: relative;
+    border-radius: 15px;
+}
+
+.renderer_modal > .renderer_closeButton{
+    align-self: end;
+    position: absolute;
+    right: 15px;
+    top:15px;
+    background: none;
+    border: none;
+    
+}
+
+.renderer_modal > .renderer_closeButton:hover {
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.renderer_modal > form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.renderer_modal > form > label {
+    font-size: medium;
+    font-weight: bold;
+}
+
+.modal > form > input {
+    height: 2rem;
+    border-radius: 2rem;
+    padding: 2px;
+    padding-left: 1rem;
+    border: none;
+}
+
+.renderer_modal > form > button {
+    max-width: 20%;
+    border: none;
+    background-color: green;
+    color: whitesmoke;
+    height: 2rem;
+    border-radius: 2rem;
+}
+
+.renderer_modal > form > button:hover {
+    cursor: pointer;
+}
+
+.renderer_modal > div {
+    height: 2rem;
+    display: flex;
+    justify-content: space-around;
+    border-bottom: slategray 2px solid;
+    margin-bottom: 5px;
+    padding: 5px;
+}
+
+.renderer_modal > div > button {
+    background: none;
+    border: none;
+    width: 50%;
+    font-weight: bold;
+    color: rgb(160, 160, 160);
+}
+
+.renderer_modal > div > button:first-child {
+    border-right: slategray 1px solid;
+}
+
+.renderer_modal > div > .renderer_selected {
+    color: black;
+}
+
+.renderer_modal > div > button:hover {
+    cursor: pointer;
+}

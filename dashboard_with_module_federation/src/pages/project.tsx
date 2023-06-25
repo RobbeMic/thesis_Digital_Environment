@@ -62,11 +62,22 @@ export default function ProjectPage(props:pageProps) {
     }
 
     useEffect(() => {
+        // window.localStorage.setItem("rerouteUrl", window.location.href)
+        // handleRedirect()
         getUrlParams()
         getFunctionModuleList()
         getViewerModuleList()
         // getFederatedButtons("federated_damage_annotator", "./functions", "http://localhost:3200/remoteEntry.js")
     }, [])
+
+    
+    // handleRedirect()
+
+    async function handleRedirect() {
+        window.localStorage.setItem("rerouteUrl", window.location.href)
+        await props.session.handleIncomingRedirect({restorePreviousSession: true})
+        
+    }
 
     // const federatedButtons = useMemo(() => getFederatedButtons("federated_damage_annotator", "./functions", "http://localhost:3200/remoteEntry.js"), [selectedItem])
 
@@ -95,6 +106,8 @@ export default function ProjectPage(props:pageProps) {
             item: selectedItem,
             dataset: projectDataset,
             profile: props.session.info.webId,
+            projectItemList: projectItemList,
+            setProjectItemList: setProjectItemList
         }
 
         // setFederatedButtons(<ModuleLoader url={applicationUrl} scope={applicationName} module={applicationModule} passedProps={propsToPass}/>)
@@ -148,7 +161,7 @@ export default function ProjectPage(props:pageProps) {
             PREFIX dcat: <http://www.w3.org/ns/dcat#>
             PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
-            SELECT ?moduleManifest ?applicationName ?moduleName ?moduleExposeUrl
+            SELECT DISTINCT ?moduleManifest ?applicationName ?moduleName ?moduleExposeUrl
             WHERE {
                 <${baseUserUrl}#savedModulesList> dct:hasPart ?moduleManifest.
 
@@ -208,7 +221,7 @@ export default function ProjectPage(props:pageProps) {
             PREFIX dcat: <http://www.w3.org/ns/dcat#>
             PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
-            SELECT ?moduleManifest ?applicationName ?moduleName ?moduleExposeUrl
+            SELECT DISTINCT ?moduleManifest ?applicationName ?moduleName ?moduleExposeUrl
 
             WHERE {
                 <${baseUserUrl}#savedModulesList> dct:hasPart ?moduleManifest.
@@ -259,9 +272,9 @@ export default function ProjectPage(props:pageProps) {
         // console.log('beep!')
         if(!projectUrl || !projectIri) return
 
-        // console.log(projectUrl + "#" + projectIri)
+        console.log(projectUrl + "#" + projectIri)
 
-        const bindingStream = await queryEngine.queryBindings(`
+        const bindingStream = await secondQueryEngine.queryBindings(`
             PREFIX solid: <http://www.w3.org/ns/solid/terms#>
             PREFIX vc: <http://www.w3.org/2006/vcard/ns#>
             PREFIX dcat: <http://www.w3.org/ns/dcat#>
@@ -287,7 +300,8 @@ export default function ProjectPage(props:pageProps) {
 
             
         `, {
-            sources: [projectUrl]
+            sources: [projectUrl],
+            datetime: new Date()
         })
 
         let projectList:itemProps[] = []
@@ -499,7 +513,7 @@ export default function ProjectPage(props:pageProps) {
     
     return(<div className="contentFrame">
         <ModuleStore isOpen={isStoreModalOpen} openModal={setIsStoreModalOpen} userUri={props.session.info.webId} session={props.session}/>
-        <AddItemModal isAddModalOpen={isAddModalOpen} setIsAddModalOpen={setIsAddModalOpen} dataset={projectDataset} database={projectUrl} projectName={props.pageHeader} />
+        <AddItemModal isAddModalOpen={isAddModalOpen} setIsAddModalOpen={setIsAddModalOpen} dataset={projectDataset} database={projectUrl} projectName={props.pageHeader} setProjectItemList={setProjectItemList} projectItemList={projectItemList} />
         <RemoveItemModal isRemoveModalOpen={isRemoveModalOpen} setIsRemoveModalOpen={setIsRemoveModalOpen} item={selectedItem} dataset={projectDataset} database={projectUrl} />
 
         <div className="contentContainer">
@@ -527,7 +541,7 @@ export default function ProjectPage(props:pageProps) {
 
                         <button>add data to another project</button>
 
-                        <button onClick={() => {moduleList? getModuleParameters(moduleList[0]): console.log("error: no module found")}}>test</button>
+                        <button onClick={() => {getProjectProps(projectDataset? projectDataset: "http://localhost:5100/Tester/projects/dummyProject", "project")}}>test</button>
                     </div>
                     
                 </div>

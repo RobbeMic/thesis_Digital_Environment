@@ -5,8 +5,7 @@
     <http://purl.org/dc/terms/hasPart> <#_site1>, <#_building1>.
 <#_site1> a <https://w3id.org/bot#Site>;
     <http://www.w3.org/2000/01/rdf-schema#label> "site";
-    <https://w3id.org/bot#hasBuilding> <#_building1>;
-    <http://www.w3.org/2000/01/rdf-schema#comment> "http://localhost:5100/Tester/models/raam_blender_test.gltf".
+    <https://w3id.org/bot#hasBuilding> <#_building1>.
 <#_building1> a <https://w3id.org/bot#Building>;
     <http://www.w3.org/2000/01/rdf-schema#label> "building";
-    <http://localhost:5000/Tester/ontology/inst#hasGltf> "http://localhost:5100/Tester/models/raam_blender_test.glb".
+    <http://localhost:5000/Tester/ontology/inst#hasGltf> <http://localhost:5100/Tester/models/raam_blender_test.glb>.

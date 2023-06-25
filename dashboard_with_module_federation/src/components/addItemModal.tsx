@@ -6,12 +6,21 @@ interface pageProps {
     setIsAddModalOpen:Function,
     dataset: string|undefined,
     database: string|undefined,
+    projectItemList: itemProps[]|undefined,
+    setProjectItemList:Function,
     projectName?: string
 }
 
 interface formDetails {
     label: string,
     desc: string
+}
+
+interface itemProps {
+    class: string,
+    uri: string,
+    label?: string,
+    properties?: itemProps[],
 }
 
 export default function AddItemModal(props:pageProps) {
@@ -23,7 +32,7 @@ export default function AddItemModal(props:pageProps) {
     })
 
     async function addConceptItem() {
-        if(!props.dataset || !props.database || formDetails.label === "") return
+        if(!props.dataset || !props.database || formDetails.label === "" || !props.projectItemList) return
 
         let conceptId:string|undefined = props.database + "#concept_" + (Math.floor(Math.random() * 1000000))
         let originId:string|undefined = props.database + "#origin_dashboard_" + (Math.floor(Math.random() * 1000000))
@@ -49,6 +58,15 @@ export default function AddItemModal(props:pageProps) {
         `, {
             sources: [props.dataset]
         })
+
+        const newItem:itemProps = {
+            label: formDetails.label,
+            class: "http://localhost:5000/Tester/ontology/mifestoRM#LinksetConcept",
+            uri: conceptId
+        }
+
+        const newList:itemProps[] = props.projectItemList.concat(newItem)
+        props.setProjectItemList(newList)
     }
 
     function handleChange(event:React.ChangeEvent<HTMLInputElement>, prop:string) {

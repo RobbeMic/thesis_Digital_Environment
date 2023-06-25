@@ -1,0 +1,47 @@
+@prefix consolid: <https://w3id.org/consolid#>.
+@prefix dcat: <http://www.w3.org/ns/dcat#>.
+@prefix dct: <http://purl.org/dc/terms/>.
+@prefix bot: <https://w3id.org/bot#>.
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix mifestoRM: <http://localhost:5000/Tester/ontology/mifestoRM#>.
+
+<#project> a consolid:Project;
+    dct:creator "Robbe";
+    dct:title "Alexianen Klooster~LOD100";
+    dct:description "lorem ipsum";
+    dcat:dataset <#_1>.
+<#_1> a dcat:Dataset;
+    dct:hasPart <#_site1>, <#_kapel>, <#_fietsenstalling>, <#_klooster>, <#_bijgebouw>, <#_Gevel_kapel_oost>, <#_Gevel_kapel_west>, <#_Gevel_kapel_noord>, <#_Dak_kapel>, <#_Dakruiter_kapel>, <#_Raam_Gevel_kapel_oost_r2>.
+<#_site1> a bot:Site;
+    rdfs:label "site";
+    bot:hasBuilding <#_kapel>, <#_fietsenstalling>, <#_klooster>, <#_bijgebouw>;
+    <http://localhost:5000/Tester/ontology/inst#hasGltf> <http://localhost:5100/Tester/models/omgeving.glb>.
+<#_kapel> a bot:Building;
+    rdfs:label "Kapel";
+    <http://localhost:5000/Tester/ontology/inst#hasGltf> <http://localhost:5100/Tester/models/kapel.glb>;
+    bot:hasElement <#_Gevel_kapel_oost>, <#_Gevel_kapel_west>, <#_Gevel_kapel_noord>, <#_Dak_kapel>.
+<#_fietsenstalling> a bot:Building;
+    rdfs:label "Fietsen Stalling";
+    <http://localhost:5000/Tester/ontology/inst#hasGltf> <http://localhost:5100/Tester/models/fietsenStalling.glb>.
+<#_klooster> a bot:Building;
+    rdfs:label "Klooster vertrekken";
+    <http://localhost:5000/Tester/ontology/inst#hasGltf> <http://localhost:5100/Tester/models/klooster.glb>.
+<#_bijgebouw> a bot:Building;
+    rdfs:label "bij-bouw";
+    <http://localhost:5000/Tester/ontology/inst#hasGltf> <http://localhost:5100/Tester/models/bijbouw.glb>.
+<#_Gevel_kapel_oost> a bot:Element;
+    rdfs:label "Gevel_kapel_oost";
+    bot:hasSubElement <#_Raam_Gevel_kapel_oost_r2>.
+<#_Gevel_kapel_west> a bot:Element;
+    rdfs:label "Gevel_kapel_west".
+<#_Gevel_kapel_noord> a bot:Element;
+    rdfs:label "Gevel_kapel_noord".
+<#_Dak_kapel> a bot:Element;
+    rdfs:label "Dak_kapel";
+    bot:hasSubElement <#_Dakruiter_kapel>.
+<#_Dakruiter_kapel> a bot:Element;
+    rdfs:label "Dakruiter";
+    <http://localhost:5000/Tester/ontology/inst#hasGltf> <http://localhost:5100/Tester/models/dakruiter.glb>.
+<#_Raam_Gevel_kapel_oost_r2> a bot:Element;
+    rdfs:label "Raam_Gevel_kapel_oost_r2".

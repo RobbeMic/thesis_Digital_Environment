@@ -13,13 +13,28 @@ export default function Layout() {
     const [pageHeader, setPageHeader] = useState<string|undefined>(undefined)
 
     let currentSession = useMemo(() => {
-        console.log("Creating a new session!")
-        const newSession = new Session()
+        // console.log("Creating a new session!")
+        
+        const savedSessionString:string|null = window.localStorage.getItem("session")
+        if(!savedSessionString) {
+            console.log("Creating a new session!")
+            const newSession = new Session()
+            return newSession
+        }
+
+        console.log("fetching previous session!")
+
+        const savedSession = JSON.parse(savedSessionString)
+        console.log(savedSession)
+        
+        const newSession = new Session({sessionInfo:savedSession})
+        // const newSession = new Session()
         return newSession
     }, [])
 
+
     return <BrowserRouter>
-        <NavBar pageHeader={pageHeader}/>
+        <NavBar pageHeader={pageHeader} setPageHeader={setPageHeader} session={currentSession}/>
         <Routes>
             <Route path="/" element={<Login pageHeader="login page" setPageHeader={setPageHeader}/>} />
             <Route path="/test" element={<div>test test</div>} />

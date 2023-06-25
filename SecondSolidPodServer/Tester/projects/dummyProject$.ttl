@@ -12,10 +12,11 @@
     dct:description "lorem ipsum";
     dcat:dataset <#_1>.
 <#_1> a dcat:Dataset;
-    dct:hasPart <#_site1>, <#_building1>, <#damage_428502>, <#damage_620683>, <#concept_952330>, <#damage_468308>, <#concept_99992>, <#damage_731034>.
+    dct:hasPart <#_site1>, <#_building1>, <#damage_428502>, <#damage_620683>, <#concept_952330>, <#damage_468308>, <#concept_99992>, <#damage_731034>, <#concept_751353>, <#concept_174545>, <#damage_218388>, <#damage_653365>, <#damage_328447>, <#damage_302644>, <#damage_304219>, <#damage_469103>, <#damage_940776>, <#damage_910635>, <#damage_9034>.
 <#_site1> a bot:Site;
     rdfs:label "the site";
-    bot:hasBuilding <#_building1>.
+    bot:hasBuilding <#_building1>;
+    <https://w3id.org/dot#hasDamage> <#damage_9034>.
 <#_building1> a bot:Building;
     rdfs:label "the dummy building";
     <https://w3id.org/dot#hasDamage> <#damage_620683>, <#damage_468308>, <#damage_673>, <#damage_731828>.
@@ -31,9 +32,65 @@
     mifestoRM:hasOrigin <#origin_444479>.
 <#concept_99992> a mifestoRM:LinksetConcept;
     rdfs:label "Voorgevel";
-    <https://w3id.org/dot#hasDamage> <#damage_731034>;
+    <https://w3id.org/dot#hasDamage> <#damage_731034>, <#damage_910635>;
     rdfs:comment "voorgevel";
-    mifestoRM:hasOrigin <#origin_dashboard_918697>.
+    mifestoRM:hasOrigin <#origin_dashboard_918697>;
+    <http://localhost:5000/Tester/ontology/inst#hasGltf> <http://localhost:5100/Tester/models/raam_blender_test.glb>.
+<#damage_731034> a <https://w3id.org/dot#DamageElement>;
+    rdfs:comment "scheur bovenste raam";
+    dct:date "2023-04-21";
+    <https://w3id.org/dot#hasCausation> <#cause_886205>;
+    mifestoRM:hasOrigin <#origin_424920>.
+<#concept_751353> a mifestoRM:LinksetConcept;
+    rdfs:label "iets";
+    <https://w3id.org/dot#hasDamage> <#damage_218388>, <#damage_328447>, <#damage_940776>;
+    rdfs:comment "";
+    mifestoRM:hasOrigin <#origin_dashboard_910140>.
+<#concept_174545> a mifestoRM:LinksetConcept;
+    rdfs:label "nog een item";
+    <https://w3id.org/dot#hasDamage> <#damage_653365>, <#damage_302644>, <#damage_304219>, <#damage_469103>;
+    rdfs:comment "";
+    mifestoRM:hasOrigin <#origin_dashboard_359383>.
+<#damage_218388> a <https://w3id.org/dot#DamagePattern>;
+    rdfs:comment "test";
+    dct:date "2023-06-23";
+    <https://w3id.org/dot#hasCausation> <#cause_344998>;
+    mifestoRM:hasOrigin <#origin_669545>.
+<#damage_653365> a <https://w3id.org/dot#DamageArea>;
+    rdfs:comment "second test";
+    dct:date "2023-06-23";
+    <https://w3id.org/dot#hasCausation> <#cause_601290>;
+    mifestoRM:hasOrigin <#origin_900720>.
+<#damage_328447> a <https://w3id.org/dot#DamageArea>;
+    rdfs:comment "test2";
+    dct:date "2023-06-22";
+    <https://w3id.org/dot#hasCausation> <#cause_996313>;
+    mifestoRM:hasOrigin <#origin_440026>.
+<#damage_302644> a <https://w3id.org/dot#DamagePattern>;
+    rdfs:comment "test3";
+    dct:date "2023-06-21";
+    <https://w3id.org/dot#hasCausation> <#cause_577206>;
+    mifestoRM:hasOrigin <#origin_955394>.
+<#damage_304219> a <https://w3id.org/dot#DamagePattern>;
+    rdfs:comment "test4";
+    dct:date "2023-06-20";
+    <https://w3id.org/dot#hasCausation> <#cause_284238>;
+    mifestoRM:hasOrigin <#origin_783436>.
+<#damage_469103> a <https://w3id.org/dot#DamageElement>;
+    rdfs:comment "test5";
+    dct:date "2023-06-15";
+    <https://w3id.org/dot#hasCausation> <#cause_100610>;
+    mifestoRM:hasOrigin <#origin_817383>.
+<#damage_940776> a <https://w3id.org/dot#DamagePattern>;
+    rdfs:comment "test6";
+    dct:date "2023-06-02";
+    <https://w3id.org/dot#hasCausation> <#cause_992854>;
+    mifestoRM:hasOrigin <#origin_913570>.
+<#damage_910635> a <https://w3id.org/dot#DamagePattern>;
+    rdfs:comment "test7";
+    dct:date "2023-06-14";
+    <https://w3id.org/dot#hasCausation> <#cause_816778>;
+    mifestoRM:hasOrigin <#origin_341269>.
 <#damage_673> a <https://w3id.org/dot#DamageArea>;
     rdfs:comment "shade";
     dct:date "2023-03-14";
@@ -52,6 +109,51 @@
     rdfs:comment "test".
 <#origin_444479> a mifestoRM:Origin;
     mifestoRM:addedOn "Thu Apr 27 2023 11:55:31 GMT+0200 (Midden-Europese zomertijd)".
+<#origin_dashboard_918697> a mifestoRM:Origin;
+    mifestoRM:addedOn "Thu Apr 27 2023 11:59:44 GMT+0200 (Midden-Europese zomertijd)";
+    mifestoRM:originatesFrom "http://localhost:3000/project?url=http://localhost:5100/Tester/projects/dummyProject&iri=project".
+<#cause_886205> a <https://w3id.org/dot#Causation>;
+    rdfs:comment "water overlast op het dak".
+<#origin_424920> a mifestoRM:Origin;
+    mifestoRM:addedOn "Thu Apr 27 2023 12:00:48 GMT+0200 (Midden-Europese zomertijd)".
+<#origin_dashboard_910140> a mifestoRM:Origin;
+    mifestoRM:addedOn "Sat Jun 24 2023 16:53:00 GMT+0200 (Midden-Europese zomertijd)";
+    mifestoRM:originatesFrom "http://localhost:3000/project?url=http://localhost:5100/Tester/projects/dummyProject&iri=project".
+<#origin_dashboard_359383> a mifestoRM:Origin;
+    mifestoRM:addedOn "Sat Jun 24 2023 17:14:43 GMT+0200 (Midden-Europese zomertijd)";
+    mifestoRM:originatesFrom "http://localhost:3000/project?url=http://localhost:5100/Tester/projects/dummyProject&iri=project".
+<#cause_344998> a <https://w3id.org/dot#Causation>;
+    rdfs:comment "test".
+<#origin_669545> a mifestoRM:Origin;
+    mifestoRM:addedOn "Sat Jun 24 2023 17:16:28 GMT+0200 (Midden-Europese zomertijd)".
+<#cause_601290> a <https://w3id.org/dot#Causation>;
+    rdfs:comment "second test".
+<#origin_900720> a mifestoRM:Origin;
+    mifestoRM:addedOn "Sat Jun 24 2023 17:26:21 GMT+0200 (Midden-Europese zomertijd)".
+<#cause_996313> a <https://w3id.org/dot#Causation>;
+    rdfs:comment "test2".
+<#origin_440026> a mifestoRM:Origin;
+    mifestoRM:addedOn "Sat Jun 24 2023 18:05:24 GMT+0200 (Midden-Europese zomertijd)".
+<#cause_577206> a <https://w3id.org/dot#Causation>;
+    rdfs:comment "test3".
+<#origin_955394> a mifestoRM:Origin;
+    mifestoRM:addedOn "Sat Jun 24 2023 18:35:32 GMT+0200 (Midden-Europese zomertijd)".
+<#cause_284238> a <https://w3id.org/dot#Causation>;
+    rdfs:comment "test4".
+<#origin_783436> a mifestoRM:Origin;
+    mifestoRM:addedOn "Sat Jun 24 2023 18:40:02 GMT+0200 (Midden-Europese zomertijd)".
+<#cause_100610> a <https://w3id.org/dot#Causation>;
+    rdfs:comment "test5".
+<#origin_817383> a mifestoRM:Origin;
+    mifestoRM:addedOn "Sat Jun 24 2023 18:58:58 GMT+0200 (Midden-Europese zomertijd)".
+<#cause_992854> a <https://w3id.org/dot#Causation>;
+    rdfs:comment "test6".
+<#origin_913570> a mifestoRM:Origin;
+    mifestoRM:addedOn "Sat Jun 24 2023 19:01:10 GMT+0200 (Midden-Europese zomertijd)".
+<#cause_816778> a <https://w3id.org/dot#Causation>;
+    rdfs:comment "test7".
+<#origin_341269> a mifestoRM:Origin;
+    mifestoRM:addedOn "Sat Jun 24 2023 19:02:19 GMT+0200 (Midden-Europese zomertijd)".
 <#cause_660> a <https://w3id.org/dot#Causation>;
     rdfs:comment "oorzaak".
 <#origin_432> a mifestoRM:Origin;
@@ -60,15 +162,12 @@
     rdfs:comment "water pressure".
 <#origin_224917> a mifestoRM:Origin;
     mifestoRM:addedOn "Wed Apr 19 2023 15:37:38 GMT+0200 (Midden-Europese zomertijd)".
-<#origin_dashboard_918697> a mifestoRM:Origin;
-    mifestoRM:addedOn "Thu Apr 27 2023 11:59:44 GMT+0200 (Midden-Europese zomertijd)";
-    mifestoRM:originatesFrom "http://localhost:3000/project?url=http://localhost:5100/Tester/projects/dummyProject&iri=project".
-<#damage_731034> a <https://w3id.org/dot#DamageElement>;
-    rdfs:comment "scheur bovenste raam";
-    dct:date "2023-04-21";
-    <https://w3id.org/dot#hasCausation> <#cause_886205>;
-    mifestoRM:hasOrigin <#origin_424920>.
-<#cause_886205> a <https://w3id.org/dot#Causation>;
-    rdfs:comment "water overlast op het dak".
-<#origin_424920> a mifestoRM:Origin;
-    mifestoRM:addedOn "Thu Apr 27 2023 12:00:48 GMT+0200 (Midden-Europese zomertijd)".
+<#damage_9034> a <https://w3id.org/dot#Damage>;
+    rdfs:comment "Gerboken glas-in-lood raam.";
+    dct:date "Sun Jun 25 2023 18:15:37 GMT+0200 (Midden-Europese zomertijd)";
+    <https://w3id.org/dot#hasCausation> <#cause_476416>;
+    mifestoRM:hasOrigin <#origin_728967>.
+<#cause_476416> a <https://w3id.org/dot#Causation>;
+    rdfs:comment "Blootstelling aan de buitenwereld.".
+<#origin_728967> a mifestoRM:Origin;
+    mifestoRM:addedOn "Sun Jun 25 2023 18:15:46 GMT+0200 (Midden-Europese zomertijd)".

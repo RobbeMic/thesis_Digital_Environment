@@ -25,7 +25,11 @@ export default function AddDamageModal(props:pageProps) {
 
     const [dropdownActive, setDropdownActive] = useState<boolean>(false)
     const [damageType, setDamageType] = useState<string>("damage")
-    const [formInput, setFormInput] = useState<formData>({})
+    const [formInput, setFormInput] = useState<formData>({
+        description: "Gerboken glas-in-lood raam.",
+        cause: "Blootstelling aan de buitenwereld.",
+        date: (new Date()).toString()
+    })
 
     async function sendForm() {
         if(!props.uri || !props.databaseToWriteTo) {console.log("the URI or database was not found!"); return}
@@ -75,6 +79,8 @@ export default function AddDamageModal(props:pageProps) {
             mifestoRM:addedOn "${currentDate}".
             }
         `, {sources: [databaseUrl]})
+
+        window.location.reload()
     }
 
     return <div className={props.isOpen? "modalBackground positionAbsolute": "hidden positionAbsolute"}>
@@ -84,10 +90,10 @@ export default function AddDamageModal(props:pageProps) {
                 <h1>{props.name? props.name: props.uri}</h1>
 
                 <label>Description</label>
-                <input type="text" placeholder="A fitting description..." onChange={(event) => {formInput.description = event.target.value}} />
+                <input type="text" defaultValue={"Gerboken glas-in-lood raam."} placeholder="A fitting description..." onChange={(event) => {formInput.description = event.target.value}} />
 
                 <label>Causation</label>
-                <input type="text" placeholder="The cause of the damage" onChange={(event) => {formInput.cause = event.target.value}} />
+                <input type="text" defaultValue={"Blootstelling aan de buitenwereld."} placeholder="The cause of the damage" onChange={(event) => {formInput.cause = event.target.value}} />
 
                 <label>Type</label>
                 

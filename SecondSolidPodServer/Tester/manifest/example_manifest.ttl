@@ -1,0 +1,47 @@
+@prefix consolid: <https://w3id.org/consolid#>.
+@prefix dcat: <http://www.w3.org/ns/dcat#>.
+@prefix dct: <http://purl.org/dc/terms/>.
+@prefix bot: <https://w3id.org/bot#>.
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix mifestoRM: <http://localhost:5000/Tester/ontology/mifestoRM#>.
+
+<#manifest> a mifesto:Manifest;
+        mifesto:moduleName "3d_renderer";
+        mifesto:moduleDescription "Renders the 3D geometries (specifically in gltf format) of the project. Also includes functions to add these geometry to any element in the graph.";
+        mifesto:hasViewerModule <#viewerModule>;
+        mifesto:hasFunctionModule <#functionModule>.
+    
+<#viewerModule> a mifesto:ViewerModule;
+    mifesto:hasVersion <#release_viewerModule_1>.
+
+<#release_viewerModule_1> a mifesto:Release;
+    mifesto:versionNumber 0.1;
+    mifesto:consumesInput <#_datasetParameter>,<#_itemParameter>;
+    mifesto:hasModule <#module_viewerModule>.
+
+<#module_viewerModule> a mifesto:Module;
+    rdfs:label "./viewer";
+    mifesto:isExposedOn "http://localhost:3100/remoteEntry.js".
+
+<#functionModule> a mifesto:FunctionModule;
+    mifesto:hasVersion <#release_functionModule_1>.
+
+<#release_functionModule_1> a mifesto:Release;
+    mifesto:versionNumber 0.1;
+    mifesto:consumesInput <#_datasetParameter>,<#_itemParameter>;
+    mifesto:hasModule <#module_functionModule>.
+
+<#module_functionModule> a mifesto:Module;
+    rdfs:label "./functions";
+    mifesto:isExposedOn "http://localhost:3100/remoteEntry.js".
+
+<#_datasetParameter> a fno:Parameter;
+    rdfs:label "database";
+    fno:type consolid:Project;
+    fno:required "true"^^xsd:boolean.
+
+<#_itemParameter> a fno:Parameter;
+    rdfs:label "item";
+    fon:type bot:Element;
+    fno:required "true"^^xsd:boolean.

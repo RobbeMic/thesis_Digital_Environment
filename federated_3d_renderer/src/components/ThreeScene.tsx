@@ -92,6 +92,9 @@ export default function ThreeScene(props:pageProps) {
     function CameraOrbitControls() {
         const {camera, gl} = useThree()
 
+        camera.position.set(25,13,10)
+        camera.lookAt(0,7,0)
+
         useEffect(() => {
             const controls = new OrbitControls(camera, gl.domElement)
             
@@ -103,7 +106,7 @@ export default function ThreeScene(props:pageProps) {
     }
 
     function Plane() {
-        return <mesh position={[0,0,0]} rotation={[-Math.PI/2,0,0]} receiveShadow={true} >
+        return <mesh position={[0,-4,0]} rotation={[-Math.PI/2,0,0]} receiveShadow={true} >
             <planeGeometry attach={"geometry"} args={[100, 100]} />
             <meshLambertMaterial attach="material" color="white" />
         </mesh>

@@ -136,7 +136,19 @@ export default function ModuleStore(props:pageProps) {
             '@comunica/actor-http-inrupt-solid-client-authn:session': props.session
         })
 
-        
+        // let newModuleList:module[]
+        // if(!moduleList) {
+        //     newModuleList = [module]
+        //     setModuleList(newModuleList)
+        // }
+        // if(moduleList) {
+        //     newModuleList = moduleList.concat(module)
+        //     setModuleList(newModuleList)
+        // }
+
+        // props.getFunctionList()
+        // props.getViewerList()
+        window.location.reload()
     }
 
 
@@ -163,7 +175,7 @@ export default function ModuleStore(props:pageProps) {
     }
 
     async function removeModuleFromProfile(module:module) {
-        if(!props.session.info.isLoggedIn || !props.userUri) {
+        if(!props.userUri) {
             console.log("you should be logged in to alter modules")
             return
         }
@@ -192,6 +204,8 @@ export default function ModuleStore(props:pageProps) {
             sources: [baseUserUrl],
             '@comunica/actor-http-inrupt-solid-client-authn:session': props.session
         })
+
+        window.location.reload()
     }
 
     function toggleSelectedModule(module:module) {

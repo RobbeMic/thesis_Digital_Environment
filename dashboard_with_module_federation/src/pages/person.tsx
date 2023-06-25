@@ -61,18 +61,88 @@ export default function Person(props:pageProps) {
 
     useEffect(() => {
         setPageHeader(pageName)
-        handleRedirectAfterLogin()
+        if(!props.session.info.isLoggedIn){
+            handleRedirectAfterLogin()
+            return
+        }
+        getProjectsOnLoad()
     }, [])
 
     async function handleRedirectAfterLogin() {
         await props.session.handleIncomingRedirect()
 
-        if (!props.session.info.isLoggedIn) return
+        if (!props.session.info.isLoggedIn) {getProjectsOnLoad(); return}
 
         console.log("Handling redirect!")
         console.log(props.session.info)
 
         const newWebId = props.session.info.webId
+
+        if(!newWebId) return
+
+        const savedSession = JSON.stringify(props.session.info)
+        window.localStorage.setItem("session", savedSession)
+
+        // not efficient as the personal information is given again with each project, should be in two bindings
+        const bindingStream = await queryEngine.queryBindings(`
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX solid: <http://www.w3.org/ns/solid/terms#>
+            PREFIX vc: <http://www.w3.org/2006/vcard/ns#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX dct: <http://purl.org/dc/terms/>
+
+            SELECT ?person ?name ?projectCatalog ?project ?projectName
+            WHERE {
+            ?person a foaf:Person;
+                vc:fn ?name.
+            ?projectCatalog a dcat:Catalog;
+                dct:hasPart ?project.
+            ?project dct:title ?projectName.
+            }`, {
+            sources: [newWebId]
+        })
+
+        bindingStream.on('data', (binding) => {
+            console.log(binding.toString())
+            let name:string = binding.get('name').value
+            if(name) {setPageHeader(name)}
+
+            if(binding.get('project').value){
+                const projectIri = new URL(binding.get('project').value)
+
+                console.log(projectIri.host + projectIri.pathname)
+                console.log(projectIri.hash.slice(1))
+                const newProject:ProjectProps = {
+                    name: binding.get('projectName').value,
+                    url: projectIri.origin + projectIri.pathname,
+                    iri: projectIri.hash.slice(1)
+                }
+
+                // let dummyList = projectDataList
+                // dummyList.push(newProject)
+
+                // console.log(dummyList)
+                // setProjectDataList(dummyList)
+                projectDataList.push(newProject)
+            }
+
+        })
+
+        bindingStream.on('end', () => {
+            setCardList(createProjectCard(projectDataList))
+        })
+    }
+
+    async function getProjectsOnLoad() {
+
+        let newWebId:string|undefined
+
+        const savedSessionString = window.localStorage.getItem("session")
+        if(savedSessionString) {
+            const savedSession = JSON.parse(savedSessionString)
+            newWebId = savedSession.webId
+        }
+        
 
         if(!newWebId) return
 
@@ -145,7 +215,8 @@ export default function Person(props:pageProps) {
         <CreateProjectModal session={props.session} isModalOpen={isCreateProjectModalOpen} setIsModalOpen={setIsCreateProjectModalOpen} setPageHeader={setPageHeader} />
         <div className="baseFunctions" >
             <button onClick={() => setIsCreateProjectModalOpen(true)}><BiPlus/> Create new project</button>
-            <button><BiBookmarkMinus/> Remove project from my profile</button>
+            <button onClick={() => {console.log(props.session)}}><BiBookmarkMinus/> Remove project from my profile</button>
+            <button onClick={() => {console.log(props.session.info)}}>test</button>
         </div>
 
         <div className="contentContainer flex-direction-row">

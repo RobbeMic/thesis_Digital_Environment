@@ -13,8 +13,8 @@
     solid:oidcIssuer <http://localhost:5000/>;
     VCARDns:fn "Robbe".
 <#listOfProjects> a dcat:Catalog;
-    dct:hasPart <http://localhost:5100/Tester/projects/dummyProject#project>, <http://localhost:5100/Tester/projects/secondProject#project>, <http://localhost:5100/Tester/projects/anotherProject#project>, <http://localhost:5100/Tester/projects/test#test>.
+    dct:hasPart <http://localhost:5100/Tester/projects/dummyProject#project>, <http://localhost:5100/Tester/projects/secondProject#project>, <http://localhost:5100/Tester/projects/anotherProject#project>, <http://localhost:5100/Tester/projects/test#test>, <http://localhost:5100/Tester/projects/kapelKlein#project>.
 <#myContributions> a consolid:PartialProject;
     dct:hasPart <http://localhost:5100/Tester/projects/dummyProject#_1>.
 <#savedModulesList> a dcat:Catalog;
-    dct:hasPart <http://localhost:5100/Tester/manifest/manifest_damage_annotator#manifest>, <http://localhost:5100/Tester/manifest/manifest_3d_renderer#manifest>.
+    dct:hasPart <http://localhost:5100/Tester/manifest/manifest_damage_annotator#manifest>.

@@ -19,7 +19,7 @@ export default function Login(props:pageProps) {
 
     setPageHeader(pageName)
 
-    const podProvider = "http://localhost:5000/"
+    const podProvider = "http://localhost:5100/"
 
     async function handleSolidLogin(event:React.FormEvent) {
         event.preventDefault()
